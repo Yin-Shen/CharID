@@ -1,0 +1,89 @@
+### Step1: CharID-Anchor
+## Intersect
+
+bed : /public/home/yshen/deep_learning/CharID/Example/GM12878.bed #Bed file of Chromatin Accessible Regions for input(Need full path)
+directory : /public/home/yshen/deep_learning/CharID #Current working root directory
+out : GM12878 #Prefix of the output file
+
+##Data preprocessing
+genome : /public/home/yshen/deep_learning/CharID/Example/hg19.fa #Genome file in fasta format(Need full path)
+outs : gm12878 #Prefix of the output file
+
+##model_parameter(You can use the default parameters,or custom parameters)
+epochs : 150 #Number of epochs.(default is 150)
+patience : 20 #Number of epochs for early stopping.(default is 20)
+learningrate : 0.001 #Learning rate.(default is 0.001)
+batch_size : 128 #Batch Size.(default is 128)
+dropout : 0.7 #Dropout rate.(default is 0.7)
+nb_filter1 : 200 #Number of filters in first layer of convolution.(default is 200)
+nb_filter2 : 100 #Number of filters in second layer of convolution.(default is 100)
+nb_filter3 : 100 #Number of filters in third layer of convolution.(default is 100)
+nb_filter4 : 64 #Number of filters in fourth layer of convolution.(default is 64)
+filter_len1 : 19 #length of filters in first layer of convolution.(default is 19)
+filter_len2 : 11 #length of filters in second layer of convolution.(default is 11)
+filter_len3 : 11 #length of filters in third layer of convolution.(default is 11)
+filter_len4 : 7 #length of filters in fourth layer of convolution.(default is 7)
+pooling_size1 : 5 #length of max_pooling size in first layer of convolution.(default is 5)
+pooling_size2 : 5 #length of max_pooling size in second layer of  convolution.(default is 5)
+pooling_size3 : 5 #length of max_pooling size in third layer of convolution.(default is 5)
+pooling_size4 : 2 #length of max_pooling size in fourth layer of convolution.(default is 2)
+GRU : 80 #units in the gru layer.(default is 80)
+hidden : 200 #units in the fully connected layer.(default is 200)
+
+##AP filter
+cooler : /public/home/yshen/deep_learning/ocr_loop/data_new/Rao2014-GM12878-MboI-allreps-filtered.5kb.cool
+resolution : 5000
+##Whole_combination
+
+
+##submit_construct_negative
+run_type : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues : smp #LSF Cluster management system running node
+pbs_queues : batch #PBS Cluster management system running node
+jobs_number : 1 #Number of tasks for a job array in one run
+
+##submit_add_feature_pos
+run_type_add_feature_pos : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_add_feature_pos : q2680v2 #LSF Cluster management system running node
+pbs_queues_add_feature_pos : batch #PBS Cluster management system running node
+jobs_number_add_feature_pos : 2 #Number of tasks for a job array in one run
+
+##submit_add_feature_neg
+run_type_add_feature_neg : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_add_feature_neg : q2680v2 #LSF Cluster management system running node
+pbs_queues_add_feature_neg : batch #PBS Cluster management system running node
+jobs_number_add_feature_neg : 2 #Number of tasks for a job array in one run
+
+##submit_train_test
+run_type_train_test : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_train_test : normal #LSF Cluster management system running node
+pbs_queues_train_test : batch #PBS Cluster management system running node
+jobs_number_train_test : 2 #Number of tasks for a job array in one run
+
+##get_pos
+predict_out : predict
+
+##submit_construct_predict
+run_type_construct_predict : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_construct_predict : smp #LSF Cluster management system running node
+pbs_queues_construct_predict : batch #PBS Cluster management system running node
+jobs_number_construct_predict : 2 #Number of tasks for a job array in one run
+
+##submit_add_feature_predict
+run_type_add_feature_predict : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_add_feature_predict : normal #LSF Cluster management system running node
+pbs_queues_add_feature_predict : batch #PBS Cluster management system running node
+jobs_number_add_feature_predict : 5 #Number of tasks for a job array in one run
+
+##submit_batch_predict
+run_type_batch_predict : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_batch_predict : q2680v2 #LSF Cluster management system running node
+pbs_queues_batch_predict : batch #PBS Cluster management system running node
+jobs_number_batch_predict : 2 #Number of tasks for a job array in one run
+
+##submit_cluster
+run_type_cluster : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
+lsf_queues_cluster : q2680v2 #LSF Cluster management system running node
+pbs_queues_cluster : batch   #PBS Cluster management system running node
+jobs_number_cluster : 2  #Number of tasks for a job array in one run  
+

@@ -1,0 +1,85 @@
+#!/bin/bash
+######
+#Author: Yin Shen
+#Mail: shenyin1995@163.com
+######
+
+All_step() {
+snakemake -R intersect data_preprocessing model_training ap_filter whole_combination construct_negative submit_construct_negative add_feature_pos add_feature_pos_signal submit_add_feature_pos_signal add_feature_neg add_feature_neg_signal submit_add_feature_neg_signal merge_pos_neg train_test submit_train_test plot_cross_val get_pos construct_predict submit_construct_predict add_feature_predict add_feature_predict_signal submit_add_feature_predict_signal batch_predict submit_batch_predict rename
+}
+
+Data_preprocessing(){
+snakemake -R intersect && mv * ../temp
+}
+
+CharID_Anchor_Model(){
+cp temp/* result/ && snakemake -R data_preprocessing model_training && cd result/ && cp pictureROC.png CharID_Anchor_Model_ROC.png && cp pictureloss.png CharID_Anchor_Model_Loss.png && cp picturehistory.png CharID_Anchor_Model_History.png && cp model_architecture.json CharID_Anchor_Model_architecture.json && cp model_weights.h5 CharID_Anchor_Model_weights.h5 && ls | egrep -v 'CharID_Anchor_Model_ROC.png|CharID_Anchor_Model_Loss.png|CharID_Anchor_Model_History.png|CharID_Anchor_Model_architecture.json|CharID_Anchor_Model_weights.h5' | xargs -I file mv file ../temp
+}
+
+CharID_Loop_Model(){
+cp temp/* result/ && snakemake -R ap_filter whole_combination construct_negative submit_construct_negative add_feature_pos add_feature_pos_signal submit_add_feature_pos_signal add_feature_neg add_feature_neg_signal submit_add_feature_neg_signal merge_pos_neg train_test submit_train_test plot_cross_val && cd result/ && cp result_whole.svg CharID_Loop_Model_ROC.svg && cp gbdt.model CharID_Loop_Model.model && ls | egrep -v 'CharID_Loop_Model.model|CharID_Loop_Model_ROC.svg|CharID_Anchor_Model_ROC.png|CharID_Anchor_Model_Loss.png|CharID_Anchor_Model_History.png|CharID_Anchor_Model_architecture.json|CharID_Anchor_Model_weights.h5' |  xargs -I file mv file ../temp
+}
+
+De_novo_prediction(){
+cp temp/* result/ && snakemake -R get_pos construct_predict submit_construct_predict add_feature_predict add_feature_predict_signal submit_add_feature_predict_signal batch_predict submit_batch_predict cluster rename 
+}
+
+Display_help() {
+    echo "Usage: $0 [-h help]  [-s step] 
+--CharID: A two-step model to predict chromatin interactions between chromatin accessible regions" >&2
+    echo '-h Show the help text'
+    echo '-s The step which you want run'
+    echo '''
+[step] must be one of "All_step" (default), or "Data_preprocessing", "CharID_Anchor_Model", "CharID_Loop_Model", "De_novo_prediction"(The first two steps are required and need to be run sequentially, the next two steps are optional run)
+'''
+exit 1
+}
+
+step=All_step
+
+while :
+do
+    case "$1" in
+      -h | --help)
+          Display_help
+          exit 0
+          ;;
+      -s | --step)
+           step="$2"
+           shift 2
+           ;;
+      --) 
+          shift
+          break
+          ;;
+      -*)
+          echo "Error: Unknown option: $1" >&2
+          exit 1 
+          ;;
+      *)  
+          break
+          ;;
+    esac
+done
+
+case "$step" in
+  All_step)
+    All_step
+    ;;
+  Data_preprocessing)
+    Data_preprocessing
+    ;;
+  CharID_Anchor_Model)
+    CharID_Anchor_Model
+    ;;
+  CharID_Loop_Model)
+    CharID_Loop_Model
+    ;;
+  De_novo_prediction)
+    De_novo_prediction
+    ;;
+ *)
+     Display_help
+exit 1
+;;
+esac

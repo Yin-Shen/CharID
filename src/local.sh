@@ -1,0 +1,26 @@
+#!/bin/bash
+cd result
+MAXINDEX=`find . -name "*.py" |wc -l`
+[ -e /tmp/fd1 ] || mkfifo /tmp/fd1
+exec 3<>/tmp/fd1
+rm -rf /tmp/fd1
+for ((i=1; i<=10; i++))
+do
+        echo >&3
+done
+for i in *.py
+do
+read -u3 
+{
+        wc -l $i 2> /dev/null
+        sleep 1
+        echo 'success_'${i}       
+        echo >&3
+}&
+done
+wait
+
+
+exec 3<&-
+exec 3>&-
+
