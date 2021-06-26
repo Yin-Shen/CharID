@@ -164,3 +164,6 @@ CharID_Loop_Model.model---model file of CharID Loop model
 CharID_Loop_Model_ROC.svg---.svg file of CharID Loop model ROC and PR curve
 CharID_Loop_Model_predict.bedpe---.bedpe file of CharID Loop predict loops
 ```
+# Contact us
+
+**Yin Shen**: shenyin1995@163.com <br>
