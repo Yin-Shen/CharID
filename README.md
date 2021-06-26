@@ -9,6 +9,7 @@ Open Chromatin Regions (OCRs) or chromatin accessible regions often harbor many 
 * matplotlib
 * sklearn
 * HTSeq
+* pyBigWig
 * cooler
 * pybedtools
 * keras
