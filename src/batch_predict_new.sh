@@ -9,7 +9,7 @@ do
 done
 if [ $File = ${MAXINDEX} ]
 then
-for i in predict_*.txt
+for i in `ls predict_*.txt`
 do
 cat>whole_${i%%.txt*}.py<<EOF
 
