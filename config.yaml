@@ -79,11 +79,11 @@ jobs_number_add_feature_predict : 5 #Number of tasks for a job array in one run
 run_type_batch_predict : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
 lsf_queues_batch_predict : q2680v2 #LSF Cluster management system running node
 pbs_queues_batch_predict : batch #PBS Cluster management system running node
-jobs_number_batch_predict : 2 #Number of tasks for a job array in one run
+jobs_number_batch_predict : 5 #Number of tasks for a job array in one run
 
 ##submit_cluster
 run_type_cluster : Local #How the python script runs in batches; example:Local(run in local); LSF(LSF Cluster management system); PBS(PBS Cluster management system).
 lsf_queues_cluster : q2680v2 #LSF Cluster management system running node
 pbs_queues_cluster : batch   #PBS Cluster management system running node
-jobs_number_cluster : 2  #Number of tasks for a job array in one run  
+jobs_number_cluster : 5  #Number of tasks for a job array in one run  
 
