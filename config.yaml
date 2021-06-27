@@ -1,12 +1,12 @@
 ### Step1: CharID-Anchor
 ## Intersect
 
-bed : /public/home/yshen/deep_learning/CharID/Example/GM12878.bed #Bed file of Chromatin Accessible Regions for input(Need full path)
+bed : /public/home/yshen/deep_learning/CharID/GM12878.bed #Bed file of Chromatin Accessible Regions for input(Need full path)
 directory : /public/home/yshen/deep_learning/CharID #Current working root directory
 out : GM12878 #Prefix of the output file
 
 ##Data preprocessing
-genome : /public/home/yshen/deep_learning/CharID/Example/hg19.fa #Genome file in fasta format(Need full path)
+genome : /public/home/yshen/deep_learning/CharID/hg19.fa #Genome file in fasta format(Need full path)
 outs : gm12878 #Prefix of the output file
 
 ##model_parameter(You can use the default parameters,or custom parameters)
@@ -31,7 +31,7 @@ GRU : 80 #units in the gru layer.(default is 80)
 hidden : 200 #units in the fully connected layer.(default is 200)
 
 ##AP filter
-cooler : /public/home/yshen/deep_learning/ocr_loop/data_new/Rao2014-GM12878-MboI-allreps-filtered.5kb.cool
+cooler : /public/home/yshen/deep_learning/CharID/Rao2014-GM12878-MboI-allreps-filtered.5kb.cool
 resolution : 5000
 ##Whole_combination
 
