@@ -154,7 +154,6 @@ CharID will perform four steps in turn and output the results of predicted OCRs-
 ### (vi) Output files
 
 If all steps are completed, the following result file is generated.
-![image](https://user-images.githubusercontent.com/23165406/123634232-c4744380-d84c-11eb-9f4e-965af57f88a7.png)
 
 ```
 CharID_Anchor_Model_architecture.json---.json file of model architecture
