@@ -111,7 +111,6 @@ H3K79me2.bigWig
 H4K20me1.bigWig
 CTCF.bigWig
 H2AFZ.bigWig
-POLR2A.bigWig
 RAD21.bigWig
 SMC3.bigWig
 ZNF143.bigWig
