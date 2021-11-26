@@ -69,7 +69,7 @@ X_test = test.iloc[:,7:].as_matrix()
 X_test = np.nan_to_num(X_test)
 Y_test = np.array(test['response'])
 
-gbm0 = GradientBoostingClassifier(n_estimators=235, random_state=10)
+gbm0 = GradientBoostingClassifier(n_estimators = 8000, learning_rate = 0.1, max_depth = 5, max_features = 'log2', random_state = 10)
 gbm0.fit(X_train,Y_train)
 y_pred_pro = gbm0.predict_proba(X_test)[:,1]
 fpr_gbdt, tpr_gbdt, thresholds_gbdt = roc_curve(Y_test, y_pred_pro)
